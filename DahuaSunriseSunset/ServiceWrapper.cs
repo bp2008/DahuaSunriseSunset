@@ -12,6 +12,10 @@ namespace DahuaSunriseSunset
 
 		private static Thread thrRunner;
 
+		static ServiceWrapper()
+		{
+			ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+		}
 		public static void Start()
 		{
 			lock (syncLockStartStop)

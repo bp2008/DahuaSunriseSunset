@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace DahuaSunriseSunset
 
 			if (Environment.UserInteractive)
 			{
-				string Title = "DahuaSunriseSunset Service Manager";
+				string Title = "DahuaSunriseSunset " + Assembly.GetEntryAssembly().GetName().Version.ToString() + " Service Manager";
 				string ServiceName = "DahuaSunriseSunset";
 				ButtonDefinition btnConfigure = new ButtonDefinition("Configure Service", btnConfigure_Click);
 				ButtonDefinition btnSimulateSunrise = new ButtonDefinition("Simulate Sunrise", btnSimulateSunrise_Click);
