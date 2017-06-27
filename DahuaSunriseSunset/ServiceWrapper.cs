@@ -88,9 +88,17 @@ namespace DahuaSunriseSunset
 				cfg.Load();
 				foreach (CameraDefinition cam in cfg.DahuaCameras)
 				{
-					WebClient wc = new WebClient();
-					wc.Credentials = cam.GetCredentials();
-					wc.DownloadString(cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=0");
+					try
+					{
+						WebClient wc = new WebClient();
+						wc.Credentials = cam.GetCredentials();
+						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=0");
+					}
+					catch (ThreadAbortException) { throw; }
+					catch (Exception ex)
+					{
+						Logger.Debug(ex);
+					}
 				}
 			}
 		}
@@ -102,9 +110,17 @@ namespace DahuaSunriseSunset
 				cfg.Load();
 				foreach (CameraDefinition cam in cfg.DahuaCameras)
 				{
-					WebClient wc = new WebClient();
-					wc.Credentials = cam.GetCredentials();
-					wc.DownloadString(cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=1");
+					try
+					{
+						WebClient wc = new WebClient();
+						wc.Credentials = cam.GetCredentials();
+						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=1");
+					}
+					catch (ThreadAbortException) { throw; }
+					catch (Exception ex)
+					{
+						Logger.Debug(ex);
+					}
 				}
 			}
 		}
