@@ -20,3 +20,5 @@ A Windows Service which changes the profile of dahua cameras between Night and D
 4) Install and Start the service, using the buttons in the service manager.
 
 If the service is running when you modify configuration, then for best results you should stop and restart the service.  If you forget to restart the service, the new configuration will be learned at the next profile switch.
+
+5) The buttons `Simulate Sunrise` and `Simulate Sunset` will cause the program to enable Day and Night profiles, respectively, in all configured cameras.
