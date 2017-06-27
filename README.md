@@ -13,7 +13,7 @@ A Windows Service which changes the profile of dahua cameras between Night and D
 
 ![Service Manager](http://i.imgur.com/qIJZPOT.png)
 
-3) Click "Configure Service".  Your location (latitude and longitude) is used to determine the time of sunrise and sunset.  In this example, two (imaginary) cameras located in Denver, CO will be switched to day profile one hour before sunrise.  Night profile will be enabled one hour after sunset.
+3) Click `Configure Service`.  Your location (latitude and longitude) is used to determine the time of sunrise and sunset.  In this example, two (imaginary) cameras located in Denver, CO will be switched to day profile one hour before sunrise.  Night profile will be enabled one hour after sunset.
 
 ![Configuration](http://i.imgur.com/a9cKsuO.png) ![Add Camera](http://i.imgur.com/jqELba5.png)
 
