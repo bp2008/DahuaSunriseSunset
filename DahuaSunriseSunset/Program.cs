@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
@@ -21,6 +22,7 @@ namespace DahuaSunriseSunset
 		{
 			string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
 			Globals.Initialize(exePath);
+			Directory.SetCurrentDirectory(Globals.ApplicationDirectoryBase);
 
 			if (Environment.UserInteractive)
 			{

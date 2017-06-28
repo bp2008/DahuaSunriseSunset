@@ -28,7 +28,7 @@ namespace DahuaSunriseSunset
 
 			for (int offsetDays = 0; offsetDays < 366; offsetDays++)
 			{
-				DateTime calcDay = now.Date.AddDays(offsetDays);
+				DateTime calcDay = now.AddDays(offsetDays);
 				SunTimes.Instance.CalculateSunRiseSetTimes(lat, lon, calcDay, ref rise, ref set, ref doesRise, ref doesSet);
 				if (nextRise == DateTime.MinValue && rise.AddHours(sunriseOffsetHours) > now)
 					nextRise = rise.AddHours(sunriseOffsetHours);

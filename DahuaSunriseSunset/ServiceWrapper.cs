@@ -50,7 +50,7 @@ namespace DahuaSunriseSunset
 						cfg.Load();
 
 						DateTime rise, set;
-						SunHelper.Calc(cfg.latitude, cfg.longitude, out rise, out set);
+						SunHelper.Calc(cfg.latitude, cfg.longitude, out rise, out set, cfg.sunriseOffsetHours, cfg.sunsetOffsetHours);
 
 						if (rise < set)
 							nextEvent = new SunEvent(rise, true);
@@ -74,7 +74,11 @@ namespace DahuaSunriseSunset
 							Thread.Sleep(1000);
 					}
 					catch (ThreadAbortException) { throw; }
-					catch (Exception ex) { Logger.Debug(ex); }
+					catch (Exception ex)
+					{
+						Logger.Debug(ex);
+						Thread.Sleep(1000);
+					}
 				}
 			}
 			catch (ThreadAbortException) { }
