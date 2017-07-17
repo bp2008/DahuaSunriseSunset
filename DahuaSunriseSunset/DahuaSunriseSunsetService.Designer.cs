@@ -1,6 +1,6 @@
 ﻿namespace DahuaSunriseSunset
 {
-	partial class MainService
+	partial class DahuaSunriseSunsetService
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			components = new System.ComponentModel.Container();
-			this.ServiceName = "Service1";
+			this.ServiceName = "DahuaSunriseSunsetService";
 		}
 
 		#endregion

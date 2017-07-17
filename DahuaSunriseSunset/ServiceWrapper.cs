@@ -86,6 +86,7 @@ namespace DahuaSunriseSunset
 		}
 		public static void TriggerSunriseActions()
 		{
+			Logger.Info("TriggerSunriseActions");
 			lock (syncLockCameraControl)
 			{
 				DahuaSunriseSunsetConfig cfg = new DahuaSunriseSunsetConfig();
@@ -108,6 +109,7 @@ namespace DahuaSunriseSunset
 		}
 		public static void TriggerSunsetActions()
 		{
+			Logger.Info("TriggerSunsetActions");
 			lock (syncLockCameraControl)
 			{
 				DahuaSunriseSunsetConfig cfg = new DahuaSunriseSunsetConfig();

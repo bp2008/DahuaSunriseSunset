@@ -69,11 +69,11 @@
       <DependentUpon>ConfigurationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DahuaSunriseSunsetConfig.cs" />
-    <Compile Include="MainService.cs">
+    <Compile Include="DahuaSunriseSunsetService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="MainService.Designer.cs">
-      <DependentUpon>MainService.cs</DependentUpon>
+    <Compile Include="DahuaSunriseSunsetService.Designer.cs">
+      <DependentUpon>DahuaSunriseSunsetService.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

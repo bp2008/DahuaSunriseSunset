@@ -27,6 +27,7 @@ namespace DahuaSunriseSunset
 			if (Environment.UserInteractive)
 			{
 				string Title = "DahuaSunriseSunset " + Assembly.GetEntryAssembly().GetName().Version.ToString() + " Service Manager";
+				Logger.Info(Title + " Startup");
 				string ServiceName = "DahuaSunriseSunset";
 				ButtonDefinition btnConfigure = new ButtonDefinition("Configure Service", btnConfigure_Click);
 				ButtonDefinition btnSimulateSunrise = new ButtonDefinition("Simulate Sunrise", btnSimulateSunrise_Click);
@@ -41,7 +42,7 @@ namespace DahuaSunriseSunset
 				ServiceBase[] ServicesToRun;
 				ServicesToRun = new ServiceBase[]
 				{
-				new MainService()
+				new DahuaSunriseSunsetService()
 				};
 				ServiceBase.Run(ServicesToRun);
 			}
