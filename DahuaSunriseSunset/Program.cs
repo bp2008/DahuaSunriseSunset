@@ -24,6 +24,9 @@ namespace DahuaSunriseSunset
 			Globals.Initialize(exePath);
 			Directory.SetCurrentDirectory(Globals.ApplicationDirectoryBase);
 
+			Application.ThreadException += Application_ThreadException;
+			Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
 			if (Environment.UserInteractive)
 			{
 				string Title = "DahuaSunriseSunset " + Assembly.GetEntryAssembly().GetName().Version.ToString() + " Service Manager";
@@ -47,6 +50,12 @@ namespace DahuaSunriseSunset
 				ServiceBase.Run(ServicesToRun);
 			}
 		}
+
+		private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+		{
+			Logger.Debug(e.Exception, "Application_ThreadException");
+		}
+
 		static Form cfgForm = null;
 
 		private static void btnConfigure_Click(object sender, EventArgs e)
