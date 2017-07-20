@@ -4,7 +4,7 @@ A Windows Service which changes the profile of dahua cameras between Night and D
 ## Requirements
 
 1) Windows OS
-2) One or more Dahua IP cameras to control, accessible by http.  Http
+2) One or more Dahua IP cameras to control, accessible by http or https.
 
 ## Usage
 
