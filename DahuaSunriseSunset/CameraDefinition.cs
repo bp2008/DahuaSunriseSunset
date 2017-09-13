@@ -9,6 +9,11 @@ namespace DahuaSunriseSunset
 		public string user;
 		public string pass;
 		public bool https;
+		public string dayZoom = "";
+		public string dayFocus = "";
+		public string nightZoom = "";
+		public string nightFocus = "";
+
 		public CameraDefinition()
 		{
 		}
@@ -19,6 +24,15 @@ namespace DahuaSunriseSunset
 			this.pass = pass;
 			this.https = https;
 		}
+
+		public CameraDefinition(string hostAndPort, string user, string pass, bool https, string dayZoom, string dayFocus, string nightZoom, string nightFocus) : this(hostAndPort, user, pass, https)
+		{
+			this.dayZoom = dayZoom;
+			this.dayFocus = dayFocus;
+			this.nightZoom = nightZoom;
+			this.nightFocus = nightFocus;
+		}
+
 		public override string ToString()
 		{
 			return "http" + (https ? "s" : "") + "://" + user + ":" + pass + "@" + hostAndPort + "/";

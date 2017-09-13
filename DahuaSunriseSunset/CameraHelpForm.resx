@@ -117,10 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Day/Night Zoom/Focus Instructions
+
+== General Instructions ==
+The Zoom and Focus settings require a Dahua camera with powered zoom and focus.  This feature is intended for powered varifocal cameras, not PTZs.  Day settings are applied at sunrise, while Night settings are applied at sunset.
+
+== Figuring out what numbers to enter ==
+To come up with appropriate numbers, manually adjust your camera's focus using its web interface, then click the "Get Zoom/Focus Numbers" button inside this app to read the current values.  For this to work, it is required that you have already configured the hostname, port, user, password, and https settings.
+
+== Manual Zoom, Manual Focus ==
+Enter Zoom and Focus values as decimal numbers between 0 and 1.
+
+== Manual Zoom, Autofocus ==
+Enter a number between 0 and 1 for Zoom, and leave the Focus field empty or put in any non-numeric value (such as "auto").
+
+== Autofocus Only ==
+To trigger autofocus while leaving zoom alone, enter any non-numeric value into the Focus field.  Leave the Zoom field empty.
+
+== No Operation ==
+To do nothing with zoom and focus levels, leave the Zoom and Focus fields empty.
+
+== NOTE ==
+Dahua's API commands for setting zoom and focus levels are buggy, so they will be called multiple times over a span of approximately 30 seconds to help ensure the desired settings take effect.
+
+// End Instructions //</value>
+  </data>
 </root>

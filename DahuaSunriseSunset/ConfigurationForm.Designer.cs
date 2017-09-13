@@ -42,6 +42,7 @@
 			this.txtRiseOffset = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.btnEditSelected = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -89,7 +90,7 @@
 			this.lbCameras.Location = new System.Drawing.Point(15, 194);
 			this.lbCameras.Name = "lbCameras";
 			this.lbCameras.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			this.lbCameras.Size = new System.Drawing.Size(257, 134);
+			this.lbCameras.Size = new System.Drawing.Size(257, 121);
 			this.lbCameras.TabIndex = 9;
 			this.toolTip1.SetToolTip(this.lbCameras, "These cameras will have their profiles changed to Day at sunrise and changed to N" +
         "ight at sunset.");
@@ -108,10 +109,10 @@
 			// btnAdd
 			// 
 			this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnAdd.Location = new System.Drawing.Point(15, 343);
+			this.btnAdd.Location = new System.Drawing.Point(15, 353);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(114, 23);
-			this.btnAdd.TabIndex = 11;
+			this.btnAdd.TabIndex = 12;
 			this.btnAdd.Text = "Add Camera";
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -119,7 +120,7 @@
 			// btnRemove
 			// 
 			this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnRemove.Location = new System.Drawing.Point(135, 343);
+			this.btnRemove.Location = new System.Drawing.Point(135, 353);
 			this.btnRemove.Name = "btnRemove";
 			this.btnRemove.Size = new System.Drawing.Size(137, 23);
 			this.btnRemove.TabIndex = 13;
@@ -167,11 +168,23 @@
 			this.label5.Text = "Sunrise Offset Hours";
 			this.toolTip1.SetToolTip(this.label5, "Number of hours after calculated sunrise before camera profiles are changed.");
 			// 
+			// btnEditSelected
+			// 
+			this.btnEditSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnEditSelected.Location = new System.Drawing.Point(135, 324);
+			this.btnEditSelected.Name = "btnEditSelected";
+			this.btnEditSelected.Size = new System.Drawing.Size(137, 23);
+			this.btnEditSelected.TabIndex = 11;
+			this.btnEditSelected.Text = "Edit Selected";
+			this.btnEditSelected.UseVisualStyleBackColor = true;
+			this.btnEditSelected.Click += new System.EventHandler(this.btnEditSelected_Click);
+			// 
 			// ConfigurationForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(284, 374);
+			this.ClientSize = new System.Drawing.Size(284, 384);
+			this.Controls.Add(this.btnEditSelected);
 			this.Controls.Add(this.txtSetOffset);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.txtRiseOffset);
@@ -208,5 +221,6 @@
 		private System.Windows.Forms.TextBox txtRiseOffset;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.ToolTip toolTip1;
+		private System.Windows.Forms.Button btnEditSelected;
 	}
 }

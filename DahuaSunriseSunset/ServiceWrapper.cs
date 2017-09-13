@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using BPUtil;
 
 namespace DahuaSunriseSunset
@@ -91,22 +92,26 @@ namespace DahuaSunriseSunset
 			{
 				DahuaSunriseSunsetConfig cfg = new DahuaSunriseSunsetConfig();
 				cfg.Load();
-				foreach (CameraDefinition cam in cfg.DahuaCameras)
+				ParallelOptions opt = new ParallelOptions();
+				opt.MaxDegreeOfParallelism = cfg.DahuaCameras.Count;
+				Parallel.ForEach(cfg.DahuaCameras, opt, (cam) =>
 				{
 					try
 					{
 						WebClient wc = new WebClient();
 						wc.Credentials = cam.GetCredentials();
 						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=0");
+						HandleZoomAndFocus(wc, cam, cam.dayZoom, cam.dayFocus);
 					}
 					catch (ThreadAbortException) { throw; }
 					catch (Exception ex)
 					{
 						Logger.Debug(ex);
 					}
-				}
+				});
 			}
 		}
+
 		public static void TriggerSunsetActions()
 		{
 			Logger.Info("TriggerSunsetActions");
@@ -114,19 +119,78 @@ namespace DahuaSunriseSunset
 			{
 				DahuaSunriseSunsetConfig cfg = new DahuaSunriseSunsetConfig();
 				cfg.Load();
-				foreach (CameraDefinition cam in cfg.DahuaCameras)
+				ParallelOptions opt = new ParallelOptions();
+				opt.MaxDegreeOfParallelism = cfg.DahuaCameras.Count;
+				Parallel.ForEach(cfg.DahuaCameras, opt, (cam) =>
 				{
 					try
 					{
 						WebClient wc = new WebClient();
 						wc.Credentials = cam.GetCredentials();
 						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=1");
+						HandleZoomAndFocus(wc, cam, cam.nightZoom, cam.nightFocus);
 					}
 					catch (ThreadAbortException) { throw; }
 					catch (Exception ex)
 					{
 						Logger.Debug(ex);
 					}
+				});
+			}
+		}
+
+		private static void HandleZoomAndFocus(WebClient wc, CameraDefinition cam, string zoom, string focus)
+		{
+			double dbl;
+			bool SetZoom = !string.IsNullOrWhiteSpace(zoom) && double.TryParse(zoom, out dbl);
+			bool FocusIsEmpty = string.IsNullOrWhiteSpace(focus);
+			bool ManualFocus = FocusIsEmpty ? false : double.TryParse(focus, out dbl);
+			// There are 4 cases
+			if (SetZoom)
+			{
+				if (ManualFocus)
+				{
+					// Case 1: Manual Zoom, Manual Focus
+					Thread.Sleep(3000);
+					// Do this in a loop, because Dahua's API is buggy.
+					// Often, the first command causes only focus to happen.
+					// The second typically causes zoom and autofocus.
+					// The third or fourth usually causes our manual focus level to be set.
+					for (int i = 0; i < 5; i++)
+					{
+						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=adjustFocus&focus=" + focus + "&zoom=" + zoom);
+						Thread.Sleep(4000);
+					}
+				}
+				else
+				{
+					// Case 2: Manual Zoom, Autofocus
+					focus = zoom;
+					Thread.Sleep(3000);
+					// Do this in a loop, because Dahua's API is buggy.
+					// Often, the first command causes only focus to happen.
+					// The second typically causes zoom and autofocus.
+					// The third or fourth usually causes our manual focus level to be set.
+					for (int i = 0; i < 4; i++)
+					{
+						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=adjustFocus&focus=" + focus + "&zoom=" + zoom);
+						Thread.Sleep(4000);
+					}
+					// This method has been, in my experience, reliable enough to call only once.
+					wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=autoFocus");
+				}
+			}
+			else
+			{
+				if (FocusIsEmpty || ManualFocus)
+				{
+					// Case 4: Don't zoom and don't focus.  Do nothing.
+				}
+				else
+				{
+					// Case 3: Autofocus Only
+					// This method has been, in my experience, reliable enough to call only once.
+					wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=autoFocus");
 				}
 			}
 		}

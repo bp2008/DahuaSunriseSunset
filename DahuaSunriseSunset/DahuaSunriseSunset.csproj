@@ -62,6 +62,12 @@
     </Compile>
     <Compile Include="CalcSunTimes.cs" />
     <Compile Include="CameraDefinition.cs" />
+    <Compile Include="CameraHelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CameraHelpForm.Designer.cs">
+      <DependentUpon>CameraHelpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigurationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceWrapper.cs" />
     <Compile Include="SunHelper.cs" />
+    <Compile Include="TextMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextMessageBox.Designer.cs">
+      <DependentUpon>TextMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewNextSunriseSunset.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,8 +112,14 @@
     <EmbeddedResource Include="AddCameraForm.resx">
       <DependentUpon>AddCameraForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CameraHelpForm.resx">
+      <DependentUpon>CameraHelpForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConfigurationForm.resx">
       <DependentUpon>ConfigurationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextMessageBox.resx">
+      <DependentUpon>TextMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewNextSunriseSunset.resx">
       <DependentUpon>ViewNextSunriseSunset.cs</DependentUpon>

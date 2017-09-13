@@ -36,8 +36,17 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.txtPass = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.btnAdd = new System.Windows.Forms.Button();
 			this.cbHttps = new System.Windows.Forms.CheckBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.txtDayZoom = new System.Windows.Forms.TextBox();
+			this.txtDayFocus = new System.Windows.Forms.TextBox();
+			this.txtNightFocus = new System.Windows.Forms.TextBox();
+			this.txtNightZoom = new System.Windows.Forms.TextBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.btnGetCurrent = new System.Windows.Forms.Button();
+			this.btnHelp = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -56,7 +65,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.txtHostAndPort.Location = new System.Drawing.Point(15, 25);
 			this.txtHostAndPort.Name = "txtHostAndPort";
-			this.txtHostAndPort.Size = new System.Drawing.Size(257, 20);
+			this.txtHostAndPort.Size = new System.Drawing.Size(248, 20);
 			this.txtHostAndPort.TabIndex = 1;
 			this.txtHostAndPort.Text = "127.0.0.1:8080";
 			this.toolTip1.SetToolTip(this.txtHostAndPort, "e.g. \"127.0.0.1:8080\"");
@@ -67,7 +76,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.txtUser.Location = new System.Drawing.Point(15, 73);
 			this.txtUser.Name = "txtUser";
-			this.txtUser.Size = new System.Drawing.Size(257, 20);
+			this.txtUser.Size = new System.Drawing.Size(248, 20);
 			this.txtUser.TabIndex = 3;
 			// 
 			// label2
@@ -85,7 +94,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.txtPass.Location = new System.Drawing.Point(15, 126);
 			this.txtPass.Name = "txtPass";
-			this.txtPass.Size = new System.Drawing.Size(257, 20);
+			this.txtPass.Size = new System.Drawing.Size(248, 20);
 			this.txtPass.TabIndex = 5;
 			// 
 			// label3
@@ -97,16 +106,6 @@
 			this.label3.TabIndex = 4;
 			this.label3.Text = "Password";
 			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(78, 215);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(130, 23);
-			this.btnAdd.TabIndex = 6;
-			this.btnAdd.Text = "Add Camera";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-			// 
 			// cbHttps
 			// 
 			this.cbHttps.AutoSize = true;
@@ -117,13 +116,106 @@
 			this.cbHttps.Text = "Use https:// (secure http)";
 			this.cbHttps.UseVisualStyleBackColor = true;
 			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(278, 9);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(56, 13);
+			this.label4.TabIndex = 8;
+			this.label4.Text = "Day Zoom";
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(278, 57);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(58, 13);
+			this.label5.TabIndex = 9;
+			this.label5.Text = "Day Focus";
+			// 
+			// txtDayZoom
+			// 
+			this.txtDayZoom.Location = new System.Drawing.Point(281, 25);
+			this.txtDayZoom.Name = "txtDayZoom";
+			this.txtDayZoom.Size = new System.Drawing.Size(287, 20);
+			this.txtDayZoom.TabIndex = 12;
+			// 
+			// txtDayFocus
+			// 
+			this.txtDayFocus.Location = new System.Drawing.Point(281, 73);
+			this.txtDayFocus.Name = "txtDayFocus";
+			this.txtDayFocus.Size = new System.Drawing.Size(287, 20);
+			this.txtDayFocus.TabIndex = 13;
+			// 
+			// txtNightFocus
+			// 
+			this.txtNightFocus.Location = new System.Drawing.Point(281, 174);
+			this.txtNightFocus.Name = "txtNightFocus";
+			this.txtNightFocus.Size = new System.Drawing.Size(287, 20);
+			this.txtNightFocus.TabIndex = 17;
+			// 
+			// txtNightZoom
+			// 
+			this.txtNightZoom.Location = new System.Drawing.Point(281, 126);
+			this.txtNightZoom.Name = "txtNightZoom";
+			this.txtNightZoom.Size = new System.Drawing.Size(287, 20);
+			this.txtNightZoom.TabIndex = 16;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(278, 158);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(64, 13);
+			this.label6.TabIndex = 15;
+			this.label6.Text = "Night Focus";
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(278, 110);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(62, 13);
+			this.label7.TabIndex = 14;
+			this.label7.Text = "Night Zoom";
+			// 
+			// btnGetCurrent
+			// 
+			this.btnGetCurrent.Location = new System.Drawing.Point(281, 215);
+			this.btnGetCurrent.Name = "btnGetCurrent";
+			this.btnGetCurrent.Size = new System.Drawing.Size(179, 23);
+			this.btnGetCurrent.TabIndex = 18;
+			this.btnGetCurrent.Text = "Get Current Zoom/Focus";
+			this.btnGetCurrent.UseVisualStyleBackColor = true;
+			this.btnGetCurrent.Click += new System.EventHandler(this.btnGetCurrent_Click);
+			// 
+			// btnHelp
+			// 
+			this.btnHelp.Location = new System.Drawing.Point(466, 215);
+			this.btnHelp.Name = "btnHelp";
+			this.btnHelp.Size = new System.Drawing.Size(102, 23);
+			this.btnHelp.TabIndex = 19;
+			this.btnHelp.Text = "Help!";
+			this.btnHelp.UseVisualStyleBackColor = true;
+			this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+			// 
 			// AddCameraForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(284, 250);
+			this.ClientSize = new System.Drawing.Size(580, 250);
+			this.Controls.Add(this.btnHelp);
+			this.Controls.Add(this.btnGetCurrent);
+			this.Controls.Add(this.txtNightFocus);
+			this.Controls.Add(this.txtNightZoom);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.label7);
+			this.Controls.Add(this.txtDayFocus);
+			this.Controls.Add(this.txtDayZoom);
+			this.Controls.Add(this.label5);
+			this.Controls.Add(this.label4);
 			this.Controls.Add(this.cbHttps);
-			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.txtPass);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.txtUser);
@@ -131,7 +223,9 @@
 			this.Controls.Add(this.txtHostAndPort);
 			this.Controls.Add(this.label1);
 			this.Name = "AddCameraForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Add Camera";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddCameraForm_FormClosing);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -146,7 +240,16 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TextBox txtPass;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.CheckBox cbHttps;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.TextBox txtDayZoom;
+		private System.Windows.Forms.TextBox txtDayFocus;
+		private System.Windows.Forms.TextBox txtNightFocus;
+		private System.Windows.Forms.TextBox txtNightZoom;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Button btnGetCurrent;
+		private System.Windows.Forms.Button btnHelp;
 	}
 }

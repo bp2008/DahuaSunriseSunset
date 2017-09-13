@@ -20,9 +20,8 @@ namespace DahuaSunriseSunset
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
 			AddCameraForm f = new AddCameraForm();
-			f.StartPosition = FormStartPosition.CenterParent;
 			f.FormClosed += F_FormClosed;
-			f.Show(this);
+			f.ShowDialog(this);
 		}
 
 		private void F_FormClosed(object sender, FormClosedEventArgs e)
@@ -86,6 +85,30 @@ namespace DahuaSunriseSunset
 
 			foreach (CameraDefinition cam in cfg.DahuaCameras)
 				lbCameras.Items.Add(cam);
+		}
+
+		private int editingIndex = -1;
+		private void btnEditSelected_Click(object sender, EventArgs e)
+		{
+			if (lbCameras.SelectedIndices.Count != 1)
+				return;
+			editingIndex = lbCameras.SelectedIndex;
+			CameraDefinition selectedCamera = (CameraDefinition)lbCameras.SelectedItem;
+			if (selectedCamera != null)
+			{
+				AddCameraForm f = new AddCameraForm();
+				f.ConvertIntoEditForm(selectedCamera);
+				f.FormClosed += F_FormClosed_Edit;
+				f.ShowDialog(this);
+			}
+		}
+
+		private void F_FormClosed_Edit(object sender, FormClosedEventArgs e)
+		{
+			AddCameraForm f = (AddCameraForm)sender;
+			if (f.newCamera == null)
+				return;
+			lbCameras.Items[editingIndex] = f.newCamera;
 		}
 	}
 }
