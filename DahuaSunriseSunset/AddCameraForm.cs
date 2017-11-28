@@ -31,6 +31,8 @@ namespace DahuaSunriseSunset
 			txtDayFocus.Text = newCamera.dayFocus;
 			txtNightZoom.Text = newCamera.nightZoom;
 			txtNightFocus.Text = newCamera.nightFocus;
+			nudLensCmdDelay.Value = newCamera.secondsBetweenLensCommands;
+			
 			this.Text = "Edit Camera";
 		}
 
@@ -57,7 +59,19 @@ namespace DahuaSunriseSunset
 
 		private void AddCameraForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			newCamera = new CameraDefinition(txtHostAndPort.Text, txtUser.Text, txtPass.Text, cbHttps.Checked, txtDayZoom.Text, txtDayFocus.Text, txtNightZoom.Text, txtNightFocus.Text);
+			newCamera = new CameraDefinition(txtHostAndPort.Text, txtUser.Text, txtPass.Text, cbHttps.Checked, txtDayZoom.Text, txtDayFocus.Text, txtNightZoom.Text, txtNightFocus.Text, (int)nudLensCmdDelay.Value);
+		}
+
+		private void lblLensCmd_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("It has been my experience that the manual zoom/focus command is unreliable." +
+				" For this reason, the program sends the command to the camera 4-5 times depending on the parameters being used." +
+				" You can configure how long the program waits between sending the commands. (default: 4 seconds)");
+		}
+
+		private void lblLensCmdQ_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			lblLensCmd_Click(sender, e);
 		}
 	}
 }

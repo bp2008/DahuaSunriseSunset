@@ -47,6 +47,10 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.btnGetCurrent = new System.Windows.Forms.Button();
 			this.btnHelp = new System.Windows.Forms.Button();
+			this.lblLensCmd = new System.Windows.Forms.Label();
+			this.nudLensCmdDelay = new System.Windows.Forms.NumericUpDown();
+			this.lblLensCmdQ = new System.Windows.Forms.LinkLabel();
+			((System.ComponentModel.ISupportInitialize)(this.nudLensCmdDelay)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -182,7 +186,7 @@
 			// 
 			// btnGetCurrent
 			// 
-			this.btnGetCurrent.Location = new System.Drawing.Point(281, 215);
+			this.btnGetCurrent.Location = new System.Drawing.Point(281, 236);
 			this.btnGetCurrent.Name = "btnGetCurrent";
 			this.btnGetCurrent.Size = new System.Drawing.Size(179, 23);
 			this.btnGetCurrent.TabIndex = 18;
@@ -192,7 +196,7 @@
 			// 
 			// btnHelp
 			// 
-			this.btnHelp.Location = new System.Drawing.Point(466, 215);
+			this.btnHelp.Location = new System.Drawing.Point(466, 236);
 			this.btnHelp.Name = "btnHelp";
 			this.btnHelp.Size = new System.Drawing.Size(102, 23);
 			this.btnHelp.TabIndex = 19;
@@ -200,11 +204,60 @@
 			this.btnHelp.UseVisualStyleBackColor = true;
 			this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
 			// 
+			// lblLensCmd
+			// 
+			this.lblLensCmd.AutoSize = true;
+			this.lblLensCmd.Cursor = System.Windows.Forms.Cursors.Help;
+			this.lblLensCmd.Location = new System.Drawing.Point(278, 202);
+			this.lblLensCmd.Name = "lblLensCmd";
+			this.lblLensCmd.Size = new System.Drawing.Size(175, 13);
+			this.lblLensCmd.TabIndex = 20;
+			this.lblLensCmd.Text = "Seconds Between Lens Commands";
+			this.lblLensCmd.Click += new System.EventHandler(this.lblLensCmd_Click);
+			// 
+			// nudLensCmdDelay
+			// 
+			this.nudLensCmdDelay.BackColor = System.Drawing.SystemColors.Window;
+			this.nudLensCmdDelay.Location = new System.Drawing.Point(496, 200);
+			this.nudLensCmdDelay.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+			this.nudLensCmdDelay.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.nudLensCmdDelay.Name = "nudLensCmdDelay";
+			this.nudLensCmdDelay.Size = new System.Drawing.Size(72, 20);
+			this.nudLensCmdDelay.TabIndex = 21;
+			this.nudLensCmdDelay.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			// 
+			// lblLensCmdQ
+			// 
+			this.lblLensCmdQ.AutoSize = true;
+			this.lblLensCmdQ.Cursor = System.Windows.Forms.Cursors.Help;
+			this.lblLensCmdQ.Location = new System.Drawing.Point(459, 202);
+			this.lblLensCmdQ.Name = "lblLensCmdQ";
+			this.lblLensCmdQ.Size = new System.Drawing.Size(13, 13);
+			this.lblLensCmdQ.TabIndex = 22;
+			this.lblLensCmdQ.TabStop = true;
+			this.lblLensCmdQ.Text = "?";
+			this.lblLensCmdQ.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblLensCmdQ_LinkClicked);
+			// 
 			// AddCameraForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(580, 250);
+			this.ClientSize = new System.Drawing.Size(580, 271);
+			this.Controls.Add(this.lblLensCmdQ);
+			this.Controls.Add(this.nudLensCmdDelay);
+			this.Controls.Add(this.lblLensCmd);
 			this.Controls.Add(this.btnHelp);
 			this.Controls.Add(this.btnGetCurrent);
 			this.Controls.Add(this.txtNightFocus);
@@ -226,6 +279,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Add Camera";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddCameraForm_FormClosing);
+			((System.ComponentModel.ISupportInitialize)(this.nudLensCmdDelay)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -251,5 +305,8 @@
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Button btnGetCurrent;
 		private System.Windows.Forms.Button btnHelp;
+		private System.Windows.Forms.Label lblLensCmd;
+		private System.Windows.Forms.NumericUpDown nudLensCmdDelay;
+		private System.Windows.Forms.LinkLabel lblLensCmdQ;
 	}
 }

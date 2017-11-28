@@ -159,7 +159,7 @@ namespace DahuaSunriseSunset
 					for (int i = 0; i < 5; i++)
 					{
 						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=adjustFocus&focus=" + focus + "&zoom=" + zoom);
-						Thread.Sleep(4000);
+						Thread.Sleep(Math.Max(1, cam.secondsBetweenLensCommands) * 1000);
 					}
 				}
 				else
@@ -174,7 +174,7 @@ namespace DahuaSunriseSunset
 					for (int i = 0; i < 4; i++)
 					{
 						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=adjustFocus&focus=" + focus + "&zoom=" + zoom);
-						Thread.Sleep(4000);
+						Thread.Sleep(Math.Max(1, cam.secondsBetweenLensCommands) * 1000);
 					}
 					// This method has been, in my experience, reliable enough to call only once.
 					wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=autoFocus");
