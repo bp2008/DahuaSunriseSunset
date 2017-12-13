@@ -17,8 +17,10 @@ namespace DahuaSunriseSunset
 		/// <param name="lon">Longitude</param>
 		/// <param name="nextRise">The next sunrise date</param>
 		/// <param name="nextSet">The next sunset date</param>
-		public static void Calc(double lat, double lon, out DateTime nextRise, out DateTime nextSet, double sunriseOffsetHours = 0, double sunsetOffsetHours = 0)
+		public static void Calc(double lat, double lon, out DateTime nextRise, out DateTime nextSet, out bool timeZoneAndLongitudeAreCompatible, double sunriseOffsetHours = 0, double sunsetOffsetHours = 0)
 		{
+			timeZoneAndLongitudeAreCompatible = true;
+
 			DateTime now = DateTime.Now;
 			nextRise = DateTime.MinValue;
 			nextSet = DateTime.MinValue;
@@ -29,7 +31,9 @@ namespace DahuaSunriseSunset
 			for (int offsetDays = 0; offsetDays < 366; offsetDays++)
 			{
 				DateTime calcDay = now.AddDays(offsetDays);
-				SunTimes.Instance.CalculateSunRiseSetTimes(lat, lon, calcDay, ref rise, ref set, ref doesRise, ref doesSet);
+				timeZoneAndLongitudeAreCompatible = SunTimes.Instance.CalculateSunRiseSetTimes(lat, lon, calcDay, ref rise, ref set, ref doesRise, ref doesSet);
+				if (!timeZoneAndLongitudeAreCompatible)
+					return;
 				if (nextRise == DateTime.MinValue && rise.AddHours(sunriseOffsetHours) > now)
 					nextRise = rise.AddHours(sunriseOffsetHours);
 				if (nextSet == DateTime.MinValue && set.AddHours(sunsetOffsetHours) > now)

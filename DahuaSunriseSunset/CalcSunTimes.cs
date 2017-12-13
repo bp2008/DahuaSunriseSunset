@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using BPUtil;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //  
@@ -154,7 +155,7 @@ internal sealed class SunTimes
 
 			if ((Sign(zone) == Sign(lon)) && (zone != 0))
 			{
-				Debug.Print("WARNING: time zone and longitude are incompatible!");
+				Logger.Info("WARNING: time zone and longitude are incompatible!");
 				return false;
 			}
 

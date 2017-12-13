@@ -23,10 +23,13 @@ namespace DahuaSunriseSunset
 			cfg.Load();
 
 			DateTime rise, set;
-			SunHelper.Calc(cfg.latitude, cfg.longitude, out rise, out set);
+			bool timeZoneAndLongitudeAreCompatible;
+			SunHelper.Calc(cfg.latitude, cfg.longitude, out rise, out set, out timeZoneAndLongitudeAreCompatible);
 			label1.Text = "Lat " + cfg.latitude + Environment.NewLine
 				+ "Lon " + cfg.longitude + Environment.NewLine
 				+ Environment.NewLine
+				+ (timeZoneAndLongitudeAreCompatible ? "" : "Your machine's time zone needs to be on the same side " + Environment.NewLine
+														  + "of the prime meridian as the longitude you have entered." + Environment.NewLine + Environment.NewLine)
 				+ (rise > set ?
 				("Sunset at " + set + Environment.NewLine
 				+ "Sunrise at " + rise)

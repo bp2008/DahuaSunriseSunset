@@ -51,8 +51,14 @@ namespace DahuaSunriseSunset
 						cfg.Load();
 
 						DateTime rise, set;
-						SunHelper.Calc(cfg.latitude, cfg.longitude, out rise, out set, cfg.sunriseOffsetHours, cfg.sunsetOffsetHours);
-
+						bool timeZoneAndLongitudeAreCompatible;
+						SunHelper.Calc(cfg.latitude, cfg.longitude, out rise, out set, out timeZoneAndLongitudeAreCompatible, cfg.sunriseOffsetHours, cfg.sunsetOffsetHours);
+						if (!timeZoneAndLongitudeAreCompatible)
+						{
+							Logger.Debug("Pausing scheduler for 1 day due to incompatible time zone and longitude. Please fix the problem and restart the service.");
+							Thread.Sleep(TimeSpan.FromDays(1));
+							continue;
+						}
 						if (rise < set)
 							nextEvent = new SunEvent(rise, true);
 						else if (set < rise)
@@ -93,7 +99,7 @@ namespace DahuaSunriseSunset
 				DahuaSunriseSunsetConfig cfg = new DahuaSunriseSunsetConfig();
 				cfg.Load();
 				ParallelOptions opt = new ParallelOptions();
-				opt.MaxDegreeOfParallelism = cfg.DahuaCameras.Count;
+				opt.MaxDegreeOfParallelism = NumberUtil.Clamp(cfg.DahuaCameras.Count, 1, 8);
 				Parallel.ForEach(cfg.DahuaCameras, opt, (cam) =>
 				{
 					try
@@ -120,7 +126,7 @@ namespace DahuaSunriseSunset
 				DahuaSunriseSunsetConfig cfg = new DahuaSunriseSunsetConfig();
 				cfg.Load();
 				ParallelOptions opt = new ParallelOptions();
-				opt.MaxDegreeOfParallelism = cfg.DahuaCameras.Count;
+				opt.MaxDegreeOfParallelism = NumberUtil.Clamp(cfg.DahuaCameras.Count, 1, 8);
 				Parallel.ForEach(cfg.DahuaCameras, opt, (cam) =>
 				{
 					try
