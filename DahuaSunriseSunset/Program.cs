@@ -84,11 +84,11 @@ namespace DahuaSunriseSunset
 		}
 		private static void btnSimulateSunrise_Click(object sender, EventArgs e)
 		{
-			ServiceWrapper.TriggerSunriseActions();
+			ServiceWrapper.TriggerSunriseActions(DateTime.Now.AddMinutes(5));
 		}
 		private static void btnSimulateSunset_Click(object sender, EventArgs e)
 		{
-			ServiceWrapper.TriggerSunsetActions();
+			ServiceWrapper.TriggerSunsetActions(DateTime.Now.AddMinutes(5));
 		}
 	}
 }

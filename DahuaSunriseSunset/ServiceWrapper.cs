@@ -70,14 +70,14 @@ namespace DahuaSunriseSunset
 						if (nextEvent.rise)
 						{
 							// Next event is a sunrise, which means it is currently Night.
-							TriggerSunsetActions();
+							TriggerSunsetActions(nextEvent.time);
 						}
 						else
 						{
 							// Next event is a sunset, which means it is currently Day.
-							TriggerSunriseActions();
+							TriggerSunriseActions(nextEvent.time);
 						}
-						while (DateTime.Now < nextEvent.time)
+						while (DateTime.Now <= nextEvent.time)
 							Thread.Sleep(1000);
 					}
 					catch (ThreadAbortException) { throw; }
@@ -91,7 +91,7 @@ namespace DahuaSunriseSunset
 			catch (ThreadAbortException) { }
 			catch (Exception ex) { Logger.Debug(ex); }
 		}
-		public static void TriggerSunriseActions()
+		public static void TriggerSunriseActions(DateTime nextEventTime)
 		{
 			Logger.Info("TriggerSunriseActions");
 			lock (syncLockCameraControl)
@@ -106,8 +106,8 @@ namespace DahuaSunriseSunset
 					{
 						WebClient wc = new WebClient();
 						wc.Credentials = cam.GetCredentials();
-						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=0");
-						HandleZoomAndFocus(wc, cam, cam.dayZoom, cam.dayFocus);
+						WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=0");
+						HandleZoomAndFocus(nextEventTime, wc, cam, cam.dayZoom, cam.dayFocus);
 					}
 					catch (ThreadAbortException) { throw; }
 					catch (Exception ex)
@@ -118,7 +118,7 @@ namespace DahuaSunriseSunset
 			}
 		}
 
-		public static void TriggerSunsetActions()
+		public static void TriggerSunsetActions(DateTime nextEventTime)
 		{
 			Logger.Info("TriggerSunsetActions");
 			lock (syncLockCameraControl)
@@ -133,8 +133,8 @@ namespace DahuaSunriseSunset
 					{
 						WebClient wc = new WebClient();
 						wc.Credentials = cam.GetCredentials();
-						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=1");
-						HandleZoomAndFocus(wc, cam, cam.nightZoom, cam.nightFocus);
+						WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=1");
+						HandleZoomAndFocus(nextEventTime, wc, cam, cam.nightZoom, cam.nightFocus);
 					}
 					catch (ThreadAbortException) { throw; }
 					catch (Exception ex)
@@ -145,7 +145,7 @@ namespace DahuaSunriseSunset
 			}
 		}
 
-		private static void HandleZoomAndFocus(WebClient wc, CameraDefinition cam, string zoom, string focus)
+		private static void HandleZoomAndFocus(DateTime nextEventTime, WebClient wc, CameraDefinition cam, string zoom, string focus)
 		{
 			double dbl;
 			bool SetZoom = !string.IsNullOrWhiteSpace(zoom) && double.TryParse(zoom, out dbl);
@@ -164,7 +164,7 @@ namespace DahuaSunriseSunset
 					// The third or fourth usually causes our manual focus level to be set.
 					for (int i = 0; i < 5; i++)
 					{
-						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=adjustFocus&focus=" + focus + "&zoom=" + zoom);
+						WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=adjustFocus&focus=" + focus + "&zoom=" + zoom);
 						Thread.Sleep(Math.Max(1, cam.secondsBetweenLensCommands) * 1000);
 					}
 				}
@@ -179,11 +179,11 @@ namespace DahuaSunriseSunset
 					// The third or fourth usually causes our manual focus level to be set.
 					for (int i = 0; i < 4; i++)
 					{
-						wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=adjustFocus&focus=" + focus + "&zoom=" + zoom);
+						WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=adjustFocus&focus=" + focus + "&zoom=" + zoom);
 						Thread.Sleep(Math.Max(1, cam.secondsBetweenLensCommands) * 1000);
 					}
 					// This method has been, in my experience, reliable enough to call only once.
-					wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=autoFocus");
+					WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=autoFocus");
 				}
 			}
 			else
@@ -196,7 +196,29 @@ namespace DahuaSunriseSunset
 				{
 					// Case 3: Autofocus Only
 					// This method has been, in my experience, reliable enough to call only once.
-					wc.DownloadString(cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=autoFocus");
+					WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/devVideoInput.cgi?action=autoFocus");
+				}
+			}
+		}
+		private static void WebRequestRobust(DateTime nextEventTime, WebClient wc, string URL)
+		{
+			WaitProgressivelyLonger wpl = new WaitProgressivelyLonger(600000, 5000, 15000);
+			while (true)
+			{
+				if (DateTime.Now >= nextEventTime)
+				{
+					Logger.Info("Cancelled web request (" + URL + ") due to the next event time being reached.");
+					return;
+				}
+				try
+				{
+					wc.DownloadString(URL);
+					return;
+				}
+				catch (ThreadAbortException) { throw; }
+				catch (Exception ex)
+				{
+					Logger.Info("Exception thrown attempting web request (" + URL + "): " + ex.Message);
 				}
 			}
 		}
