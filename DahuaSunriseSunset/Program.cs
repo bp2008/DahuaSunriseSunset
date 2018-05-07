@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.ServiceProcess;
 using System.Text;
@@ -26,6 +27,8 @@ namespace DahuaSunriseSunset
 
 			Application.ThreadException += Application_ThreadException;
 			Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 
 			if (Environment.UserInteractive)
 			{
