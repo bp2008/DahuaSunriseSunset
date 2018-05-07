@@ -32,8 +32,34 @@ namespace DahuaSunriseSunset
 			txtNightZoom.Text = newCamera.nightZoom;
 			txtNightFocus.Text = newCamera.nightFocus;
 			nudLensCmdDelay.Value = newCamera.secondsBetweenLensCommands;
-			
+
+			SetCbItems(cbSunriseProfile, Enum.GetNames(typeof(Profile)), newCamera.sunriseProfile);
+			SetCbItems(cbSunsetProfile, Enum.GetNames(typeof(Profile)), newCamera.sunsetProfile);
+
 			this.Text = "Edit Camera";
+		}
+
+		private void SetCbItems(ComboBox comboBox, string[] items, object selectedValue)
+		{
+			comboBox.Items.Clear();
+			comboBox.Items.AddRange(items);
+			string selectedItem = selectedValue.ToString();
+			for (int i = 0; i < items.Length; i++)
+				if (items[i] == selectedItem)
+				{
+					comboBox.SelectedIndex = i;
+					break;
+				}
+		}
+		private Profile GetSelectedProfile(ComboBox comboBox, Profile defaultValue)
+		{
+			int idx = comboBox.SelectedIndex;
+			if (idx >= 0 && idx < comboBox.Items.Count)
+			{
+				if (Enum.TryParse<Profile>(comboBox.Items[idx].ToString(), out Profile profile))
+					return profile;
+			}
+			return defaultValue;
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e)
@@ -59,7 +85,7 @@ namespace DahuaSunriseSunset
 
 		private void AddCameraForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			newCamera = new CameraDefinition(txtHostAndPort.Text, txtUser.Text, txtPass.Text, cbHttps.Checked, txtDayZoom.Text, txtDayFocus.Text, txtNightZoom.Text, txtNightFocus.Text, (int)nudLensCmdDelay.Value);
+			newCamera = new CameraDefinition(txtHostAndPort.Text, txtUser.Text, txtPass.Text, cbHttps.Checked, txtDayZoom.Text, txtDayFocus.Text, txtNightZoom.Text, txtNightFocus.Text, (int)nudLensCmdDelay.Value, GetSelectedProfile(cbSunriseProfile, Profile.Day), GetSelectedProfile(cbSunsetProfile, Profile.Night));
 		}
 
 		private void lblLensCmd_Click(object sender, EventArgs e)

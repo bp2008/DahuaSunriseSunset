@@ -50,6 +50,10 @@
 			this.lblLensCmd = new System.Windows.Forms.Label();
 			this.nudLensCmdDelay = new System.Windows.Forms.NumericUpDown();
 			this.lblLensCmdQ = new System.Windows.Forms.LinkLabel();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label9 = new System.Windows.Forms.Label();
+			this.cbSunriseProfile = new System.Windows.Forms.ComboBox();
+			this.cbSunsetProfile = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.nudLensCmdDelay)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -78,7 +82,7 @@
 			// 
 			this.txtUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtUser.Location = new System.Drawing.Point(15, 73);
+			this.txtUser.Location = new System.Drawing.Point(15, 64);
 			this.txtUser.Name = "txtUser";
 			this.txtUser.Size = new System.Drawing.Size(248, 20);
 			this.txtUser.TabIndex = 3;
@@ -86,7 +90,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(12, 57);
+			this.label2.Location = new System.Drawing.Point(12, 48);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(60, 13);
 			this.label2.TabIndex = 2;
@@ -96,7 +100,7 @@
 			// 
 			this.txtPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtPass.Location = new System.Drawing.Point(15, 126);
+			this.txtPass.Location = new System.Drawing.Point(15, 103);
 			this.txtPass.Name = "txtPass";
 			this.txtPass.Size = new System.Drawing.Size(248, 20);
 			this.txtPass.TabIndex = 5;
@@ -104,7 +108,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(12, 110);
+			this.label3.Location = new System.Drawing.Point(12, 87);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(53, 13);
 			this.label3.TabIndex = 4;
@@ -113,7 +117,7 @@
 			// cbHttps
 			// 
 			this.cbHttps.AutoSize = true;
-			this.cbHttps.Location = new System.Drawing.Point(15, 167);
+			this.cbHttps.Location = new System.Drawing.Point(15, 129);
 			this.cbHttps.Name = "cbHttps";
 			this.cbHttps.Size = new System.Drawing.Size(146, 17);
 			this.cbHttps.TabIndex = 7;
@@ -189,7 +193,7 @@
 			this.btnGetCurrent.Location = new System.Drawing.Point(281, 236);
 			this.btnGetCurrent.Name = "btnGetCurrent";
 			this.btnGetCurrent.Size = new System.Drawing.Size(179, 23);
-			this.btnGetCurrent.TabIndex = 18;
+			this.btnGetCurrent.TabIndex = 25;
 			this.btnGetCurrent.Text = "Get Current Zoom/Focus";
 			this.btnGetCurrent.UseVisualStyleBackColor = true;
 			this.btnGetCurrent.Click += new System.EventHandler(this.btnGetCurrent_Click);
@@ -199,7 +203,7 @@
 			this.btnHelp.Location = new System.Drawing.Point(466, 236);
 			this.btnHelp.Name = "btnHelp";
 			this.btnHelp.Size = new System.Drawing.Size(102, 23);
-			this.btnHelp.TabIndex = 19;
+			this.btnHelp.TabIndex = 26;
 			this.btnHelp.Text = "Help!";
 			this.btnHelp.UseVisualStyleBackColor = true;
 			this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
@@ -245,16 +249,56 @@
 			this.lblLensCmdQ.Location = new System.Drawing.Point(459, 202);
 			this.lblLensCmdQ.Name = "lblLensCmdQ";
 			this.lblLensCmdQ.Size = new System.Drawing.Size(13, 13);
-			this.lblLensCmdQ.TabIndex = 22;
+			this.lblLensCmdQ.TabIndex = 18;
 			this.lblLensCmdQ.TabStop = true;
 			this.lblLensCmdQ.Text = "?";
 			this.lblLensCmdQ.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblLensCmdQ_LinkClicked);
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(12, 158);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(77, 13);
+			this.label8.TabIndex = 23;
+			this.label8.Text = "Sunrise Profile:";
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(12, 191);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(75, 13);
+			this.label9.TabIndex = 24;
+			this.label9.Text = "Sunset Profile:";
+			// 
+			// cbSunriseProfile
+			// 
+			this.cbSunriseProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbSunriseProfile.FormattingEnabled = true;
+			this.cbSunriseProfile.Location = new System.Drawing.Point(109, 155);
+			this.cbSunriseProfile.Name = "cbSunriseProfile";
+			this.cbSunriseProfile.Size = new System.Drawing.Size(154, 21);
+			this.cbSunriseProfile.TabIndex = 8;
+			// 
+			// cbSunsetProfile
+			// 
+			this.cbSunsetProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbSunsetProfile.FormattingEnabled = true;
+			this.cbSunsetProfile.Location = new System.Drawing.Point(109, 188);
+			this.cbSunsetProfile.Name = "cbSunsetProfile";
+			this.cbSunsetProfile.Size = new System.Drawing.Size(154, 21);
+			this.cbSunsetProfile.TabIndex = 9;
 			// 
 			// AddCameraForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(580, 271);
+			this.Controls.Add(this.cbSunsetProfile);
+			this.Controls.Add(this.cbSunriseProfile);
+			this.Controls.Add(this.label9);
+			this.Controls.Add(this.label8);
 			this.Controls.Add(this.lblLensCmdQ);
 			this.Controls.Add(this.nudLensCmdDelay);
 			this.Controls.Add(this.lblLensCmd);
@@ -308,5 +352,9 @@
 		private System.Windows.Forms.Label lblLensCmd;
 		private System.Windows.Forms.NumericUpDown nudLensCmdDelay;
 		private System.Windows.Forms.LinkLabel lblLensCmdQ;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.ComboBox cbSunriseProfile;
+		private System.Windows.Forms.ComboBox cbSunsetProfile;
 	}
 }

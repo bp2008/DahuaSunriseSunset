@@ -106,7 +106,7 @@ namespace DahuaSunriseSunset
 					{
 						WebClient wc = new WebClient();
 						wc.Credentials = cam.GetCredentials();
-						WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=0");
+						WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=" + (int)cam.sunriseProfile);
 						HandleZoomAndFocus(nextEventTime, wc, cam, cam.dayZoom, cam.dayFocus);
 					}
 					catch (ThreadAbortException) { throw; }
@@ -133,7 +133,7 @@ namespace DahuaSunriseSunset
 					{
 						WebClient wc = new WebClient();
 						wc.Credentials = cam.GetCredentials();
-						WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=1");
+						WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=" + (int)cam.sunsetProfile);
 						HandleZoomAndFocus(nextEventTime, wc, cam, cam.nightZoom, cam.nightFocus);
 					}
 					catch (ThreadAbortException) { throw; }

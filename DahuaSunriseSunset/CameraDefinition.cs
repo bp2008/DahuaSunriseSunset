@@ -14,6 +14,8 @@ namespace DahuaSunriseSunset
 		public string nightZoom = "";
 		public string nightFocus = "";
 		public int secondsBetweenLensCommands = 4;
+		public Profile sunriseProfile = Profile.Day;
+		public Profile sunsetProfile = Profile.Night;
 
 		public CameraDefinition()
 		{
@@ -26,13 +28,15 @@ namespace DahuaSunriseSunset
 			this.https = https;
 		}
 
-		public CameraDefinition(string hostAndPort, string user, string pass, bool https, string dayZoom, string dayFocus, string nightZoom, string nightFocus, int lensDelay) : this(hostAndPort, user, pass, https)
+		public CameraDefinition(string hostAndPort, string user, string pass, bool https, string dayZoom, string dayFocus, string nightZoom, string nightFocus, int lensDelay, Profile sunriseProfile, Profile sunsetProfile) : this(hostAndPort, user, pass, https)
 		{
 			this.dayZoom = dayZoom;
 			this.dayFocus = dayFocus;
 			this.nightZoom = nightZoom;
 			this.nightFocus = nightFocus;
 			this.secondsBetweenLensCommands = lensDelay;
+			this.sunriseProfile = sunriseProfile;
+			this.sunsetProfile = sunsetProfile;
 		}
 
 		public override string ToString()
@@ -51,5 +55,11 @@ namespace DahuaSunriseSunset
 		{
 			return "http" + (https ? "s" : "") + "://" + hostAndPort + "/";
 		}
+	}
+	public enum Profile
+	{
+		Day = 0,
+		Night = 1,
+		Normal = 2
 	}
 }
