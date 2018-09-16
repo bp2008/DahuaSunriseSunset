@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CoordinateSharp;
 
 namespace DahuaSunriseSunset
 {
@@ -20,27 +21,44 @@ namespace DahuaSunriseSunset
 		public static void Calc(double lat, double lon, out DateTime nextRise, out DateTime nextSet, out bool timeZoneAndLongitudeAreCompatible, double sunriseOffsetHours = 0, double sunsetOffsetHours = 0)
 		{
 			timeZoneAndLongitudeAreCompatible = true;
-
-			DateTime now = DateTime.Now;
+			DateTime now = DateTime.UtcNow;
 			nextRise = DateTime.MinValue;
 			nextSet = DateTime.MinValue;
-
-			DateTime rise = DateTime.MinValue, set = DateTime.MinValue;
-			bool doesRise = false, doesSet = false;
-
 			for (int offsetDays = 0; offsetDays < 366; offsetDays++)
 			{
 				DateTime calcDay = now.AddDays(offsetDays);
-				timeZoneAndLongitudeAreCompatible = SunTimes.Instance.CalculateSunRiseSetTimes(lat, lon, calcDay, ref rise, ref set, ref doesRise, ref doesSet);
+				Coordinate c = new Coordinate(lat, lon, calcDay);
 				if (!timeZoneAndLongitudeAreCompatible)
 					return;
-				if (nextRise == DateTime.MinValue && rise.AddHours(sunriseOffsetHours) > now)
-					nextRise = rise.AddHours(sunriseOffsetHours);
-				if (nextSet == DateTime.MinValue && set.AddHours(sunsetOffsetHours) > now)
-					nextSet = set.AddHours(sunsetOffsetHours);
+				if (nextRise == DateTime.MinValue && c.CelestialInfo.SunRise != null && c.CelestialInfo.SunRise.Value.AddHours(sunriseOffsetHours) > now)
+					nextRise = c.CelestialInfo.SunRise.Value.AddHours(sunriseOffsetHours).ToLocalTime();
+				if (nextSet == DateTime.MinValue && c.CelestialInfo.SunSet != null && c.CelestialInfo.SunSet.Value.AddHours(sunsetOffsetHours) > now)
+					nextSet = c.CelestialInfo.SunSet.Value.AddHours(sunsetOffsetHours).ToLocalTime();
 				if (nextRise != DateTime.MinValue && nextSet != DateTime.MinValue)
 					return;
 			}
+			//timeZoneAndLongitudeAreCompatible = true;
+
+			//DateTime now = DateTime.Now;
+			//nextRise = DateTime.MinValue;
+			//nextSet = DateTime.MinValue;
+
+			//DateTime rise = DateTime.MinValue, set = DateTime.MinValue;
+			//bool doesRise = false, doesSet = false;
+
+			//for (int offsetDays = 0; offsetDays < 366; offsetDays++)
+			//{
+			//	DateTime calcDay = now.AddDays(offsetDays);
+			//	timeZoneAndLongitudeAreCompatible = SunTimes.Instance.CalculateSunRiseSetTimes(lat, lon, calcDay, ref rise, ref set, ref doesRise, ref doesSet);
+			//	if (!timeZoneAndLongitudeAreCompatible)
+			//		return;
+			//	if (nextRise == DateTime.MinValue && rise.AddHours(sunriseOffsetHours) > now)
+			//		nextRise = rise.AddHours(sunriseOffsetHours);
+			//	if (nextSet == DateTime.MinValue && set.AddHours(sunsetOffsetHours) > now)
+			//		nextSet = set.AddHours(sunsetOffsetHours);
+			//	if (nextRise != DateTime.MinValue && nextSet != DateTime.MinValue)
+			//		return;
+			//}
 		}
 	}
 }
