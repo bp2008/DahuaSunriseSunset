@@ -29,7 +29,7 @@ Configure the camera's **Conditions** the way you want them using the camera's w
 
 If the service isn't able to switch the camera's profile, try going to **Profile Management** and choosing **Full Time**:
 
-![screenshot](https://i.imgur.com/s6JACCu.png)
+![Profile Management Screenshot](https://i.imgur.com/s6JACCu.png)
 
 ## Building from source
 
