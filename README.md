@@ -25,7 +25,9 @@ The buttons `Simulate Sunrise` and `Simulate Sunset` will cause the program to e
 
 ## Camera Configuration
 
-Configure the camera's **Conditions** using the camera's web interface.  Under **Profile Management**, choose **Full Time**.
+Configure the camera's **Conditions** the way you want them using the camera's web interface.
+
+Under **Profile Management**, choose **Full Time**.
 
 ![screenshot](https://i.imgur.com/s6JACCu.png)
 
