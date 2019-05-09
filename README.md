@@ -27,7 +27,7 @@ The buttons `Simulate Sunrise` and `Simulate Sunset` will cause the program to e
 
 Configure the camera's **Conditions** the way you want them using the camera's web interface.
 
-Under **Profile Management**, choose **Full Time**.
+If the service isn't able to switch the camera's profile, try going to **Profile Management** and choosing **Full Time**:
 
 ![screenshot](https://i.imgur.com/s6JACCu.png)
 
