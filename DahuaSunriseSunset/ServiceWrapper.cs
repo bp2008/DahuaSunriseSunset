@@ -202,7 +202,7 @@ namespace DahuaSunriseSunset
 		}
 		private static void WebRequestRobust(DateTime nextEventTime, WebClient wc, string URL)
 		{
-			WaitProgressivelyLonger wpl = new WaitProgressivelyLonger(600000, 5000, 15000);
+			WaitProgressivelyLonger wpl = WaitProgressivelyLonger.Linear(600000, 5000, 0);
 			while (true)
 			{
 				if (DateTime.Now >= nextEventTime)
@@ -219,6 +219,7 @@ namespace DahuaSunriseSunset
 				catch (Exception ex)
 				{
 					Logger.Info("Exception thrown attempting web request (" + URL + "): " + ex.Message);
+					wpl.Wait();
 				}
 			}
 		}
