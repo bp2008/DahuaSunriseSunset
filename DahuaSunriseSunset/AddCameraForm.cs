@@ -14,10 +14,13 @@ namespace DahuaSunriseSunset
 	public partial class AddCameraForm : Form
 	{
 		public CameraDefinition newCamera;
+		Color defaultChannelNumbersColor, defaultChannelNumbersBgColor;
 
 		public AddCameraForm()
 		{
 			InitializeComponent();
+			defaultChannelNumbersColor = txtChannelNumbers.ForeColor;
+			defaultChannelNumbersBgColor = txtChannelNumbers.BackColor;
 		}
 
 		public void ConvertIntoEditForm(CameraDefinition existingCameraData)
@@ -32,6 +35,8 @@ namespace DahuaSunriseSunset
 			txtNightZoom.Text = newCamera.nightZoom;
 			txtNightFocus.Text = newCamera.nightFocus;
 			nudLensCmdDelay.Value = newCamera.secondsBetweenLensCommands;
+
+			txtChannelNumbers.Text = newCamera.channelNumbers;
 
 			SetCbItems(cbSunriseProfile, Enum.GetNames(typeof(Profile)), newCamera.sunriseProfile);
 			SetCbItems(cbSunsetProfile, Enum.GetNames(typeof(Profile)), newCamera.sunsetProfile);
@@ -85,7 +90,7 @@ namespace DahuaSunriseSunset
 
 		private void AddCameraForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			newCamera = new CameraDefinition(txtHostAndPort.Text, txtUser.Text, txtPass.Text, cbHttps.Checked, txtDayZoom.Text, txtDayFocus.Text, txtNightZoom.Text, txtNightFocus.Text, (int)nudLensCmdDelay.Value, GetSelectedProfile(cbSunriseProfile, Profile.Day), GetSelectedProfile(cbSunsetProfile, Profile.Night));
+			newCamera = new CameraDefinition(txtHostAndPort.Text, txtUser.Text, txtPass.Text, cbHttps.Checked, txtDayZoom.Text, txtDayFocus.Text, txtNightZoom.Text, txtNightFocus.Text, (int)nudLensCmdDelay.Value, GetSelectedProfile(cbSunriseProfile, Profile.Day), GetSelectedProfile(cbSunsetProfile, Profile.Night), txtChannelNumbers.Text);
 		}
 
 		private void lblLensCmd_Click(object sender, EventArgs e)
@@ -98,6 +103,30 @@ namespace DahuaSunriseSunset
 		private void lblLensCmdQ_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			lblLensCmd_Click(sender, e);
+		}
+
+		private void lblMultiSensorHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			lblMultiSensorQ_Click(sender, e);
+		}
+
+		private void lblMultiSensorQ_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("If your camera has multiple individually-configurable video channels you wish to control at sunrise/sunset, enter those channel numbers in the box, separated by commas. Each channel will be switched to the desired profile in sequence, 5 seconds apart." + Environment.NewLine + Environment.NewLine + "Note: Zoom/Focus is not channel-specific.");
+		}
+
+		private void txtChannelNumbers_TextChanged(object sender, EventArgs e)
+		{
+			if (CameraDefinition.GetChannelIndexes(txtChannelNumbers.Text, out int[] channelIndexes))
+			{
+				txtChannelNumbers.ForeColor = defaultChannelNumbersColor;
+				txtChannelNumbers.BackColor = defaultChannelNumbersBgColor;
+			}
+			else
+			{
+				txtChannelNumbers.ForeColor = Color.FromArgb(200,0,0);
+				txtChannelNumbers.BackColor = Color.FromArgb(255, 220, 220);
+			}
 		}
 	}
 }

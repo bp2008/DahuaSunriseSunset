@@ -106,7 +106,13 @@ namespace DahuaSunriseSunset
 					{
 						WebClient wc = new WebClient();
 						wc.Credentials = cam.GetCredentials();
-						WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=" + (int)cam.sunriseProfile);
+						int[] channelIndexes = cam.ChannelIndexes;
+						for (int i = 0; i < channelIndexes.Length; i++)
+						{
+							WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[" + channelIndexes[i] + "].Config[0]=" + (int)cam.sunriseProfile);
+							if (i + 1 < channelIndexes.Length)
+								Thread.Sleep(5000);
+						}
 						HandleZoomAndFocus(nextEventTime, wc, cam, cam.dayZoom, cam.dayFocus);
 					}
 					catch (ThreadAbortException) { throw; }
@@ -133,7 +139,13 @@ namespace DahuaSunriseSunset
 					{
 						WebClient wc = new WebClient();
 						wc.Credentials = cam.GetCredentials();
-						WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[0].Config[0]=" + (int)cam.sunsetProfile);
+						int[] channelIndexes = cam.ChannelIndexes;
+						for (int i = 0; i < channelIndexes.Length; i++)
+						{
+							WebRequestRobust(nextEventTime, wc, cam.GetUrlBase() + "cgi-bin/configManager.cgi?action=setConfig&VideoInMode[" + channelIndexes[i] + "].Config[0]=" + (int)cam.sunsetProfile);
+							if (i + 1 < channelIndexes.Length)
+								Thread.Sleep(5000);
+						}
 						HandleZoomAndFocus(nextEventTime, wc, cam, cam.nightZoom, cam.nightFocus);
 					}
 					catch (ThreadAbortException) { throw; }

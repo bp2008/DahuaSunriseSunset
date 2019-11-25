@@ -54,6 +54,10 @@
 			this.label9 = new System.Windows.Forms.Label();
 			this.cbSunriseProfile = new System.Windows.Forms.ComboBox();
 			this.cbSunsetProfile = new System.Windows.Forms.ComboBox();
+			this.lblMultiSensorQ = new System.Windows.Forms.Label();
+			this.label11 = new System.Windows.Forms.Label();
+			this.lblMultiSensorHelp = new System.Windows.Forms.LinkLabel();
+			this.txtChannelNumbers = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.nudLensCmdDelay)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -147,28 +151,28 @@
 			this.txtDayZoom.Location = new System.Drawing.Point(281, 25);
 			this.txtDayZoom.Name = "txtDayZoom";
 			this.txtDayZoom.Size = new System.Drawing.Size(287, 20);
-			this.txtDayZoom.TabIndex = 12;
+			this.txtDayZoom.TabIndex = 15;
 			// 
 			// txtDayFocus
 			// 
 			this.txtDayFocus.Location = new System.Drawing.Point(281, 73);
 			this.txtDayFocus.Name = "txtDayFocus";
 			this.txtDayFocus.Size = new System.Drawing.Size(287, 20);
-			this.txtDayFocus.TabIndex = 13;
+			this.txtDayFocus.TabIndex = 17;
 			// 
 			// txtNightFocus
 			// 
 			this.txtNightFocus.Location = new System.Drawing.Point(281, 174);
 			this.txtNightFocus.Name = "txtNightFocus";
 			this.txtNightFocus.Size = new System.Drawing.Size(287, 20);
-			this.txtNightFocus.TabIndex = 17;
+			this.txtNightFocus.TabIndex = 21;
 			// 
 			// txtNightZoom
 			// 
 			this.txtNightZoom.Location = new System.Drawing.Point(281, 126);
 			this.txtNightZoom.Name = "txtNightZoom";
 			this.txtNightZoom.Size = new System.Drawing.Size(287, 20);
-			this.txtNightZoom.TabIndex = 16;
+			this.txtNightZoom.TabIndex = 19;
 			// 
 			// label6
 			// 
@@ -193,7 +197,7 @@
 			this.btnGetCurrent.Location = new System.Drawing.Point(281, 236);
 			this.btnGetCurrent.Name = "btnGetCurrent";
 			this.btnGetCurrent.Size = new System.Drawing.Size(179, 23);
-			this.btnGetCurrent.TabIndex = 25;
+			this.btnGetCurrent.TabIndex = 27;
 			this.btnGetCurrent.Text = "Get Current Zoom/Focus";
 			this.btnGetCurrent.UseVisualStyleBackColor = true;
 			this.btnGetCurrent.Click += new System.EventHandler(this.btnGetCurrent_Click);
@@ -203,7 +207,7 @@
 			this.btnHelp.Location = new System.Drawing.Point(466, 236);
 			this.btnHelp.Name = "btnHelp";
 			this.btnHelp.Size = new System.Drawing.Size(102, 23);
-			this.btnHelp.TabIndex = 26;
+			this.btnHelp.TabIndex = 29;
 			this.btnHelp.Text = "Help!";
 			this.btnHelp.UseVisualStyleBackColor = true;
 			this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
@@ -235,7 +239,7 @@
             0});
 			this.nudLensCmdDelay.Name = "nudLensCmdDelay";
 			this.nudLensCmdDelay.Size = new System.Drawing.Size(72, 20);
-			this.nudLensCmdDelay.TabIndex = 21;
+			this.nudLensCmdDelay.TabIndex = 25;
 			this.nudLensCmdDelay.Value = new decimal(new int[] {
             4,
             0,
@@ -249,7 +253,7 @@
 			this.lblLensCmdQ.Location = new System.Drawing.Point(459, 202);
 			this.lblLensCmdQ.Name = "lblLensCmdQ";
 			this.lblLensCmdQ.Size = new System.Drawing.Size(13, 13);
-			this.lblLensCmdQ.TabIndex = 18;
+			this.lblLensCmdQ.TabIndex = 23;
 			this.lblLensCmdQ.TabStop = true;
 			this.lblLensCmdQ.Text = "?";
 			this.lblLensCmdQ.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblLensCmdQ_LinkClicked);
@@ -279,7 +283,7 @@
 			this.cbSunriseProfile.Location = new System.Drawing.Point(109, 155);
 			this.cbSunriseProfile.Name = "cbSunriseProfile";
 			this.cbSunriseProfile.Size = new System.Drawing.Size(154, 21);
-			this.cbSunriseProfile.TabIndex = 8;
+			this.cbSunriseProfile.TabIndex = 9;
 			// 
 			// cbSunsetProfile
 			// 
@@ -288,13 +292,58 @@
 			this.cbSunsetProfile.Location = new System.Drawing.Point(109, 188);
 			this.cbSunsetProfile.Name = "cbSunsetProfile";
 			this.cbSunsetProfile.Size = new System.Drawing.Size(154, 21);
-			this.cbSunsetProfile.TabIndex = 9;
+			this.cbSunsetProfile.TabIndex = 11;
+			// 
+			// lblMultiSensorQ
+			// 
+			this.lblMultiSensorQ.AutoSize = true;
+			this.lblMultiSensorQ.Cursor = System.Windows.Forms.Cursors.Help;
+			this.lblMultiSensorQ.Location = new System.Drawing.Point(12, 220);
+			this.lblMultiSensorQ.Name = "lblMultiSensorQ";
+			this.lblMultiSensorQ.Size = new System.Drawing.Size(107, 13);
+			this.lblMultiSensorQ.TabIndex = 27;
+			this.lblMultiSensorQ.Text = "Multi-sensor camera?";
+			this.lblMultiSensorQ.Click += new System.EventHandler(this.lblMultiSensorQ_Click);
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(14, 241);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(94, 13);
+			this.label11.TabIndex = 28;
+			this.label11.Text = "Channel Numbers:";
+			// 
+			// lblMultiSensorHelp
+			// 
+			this.lblMultiSensorHelp.AutoSize = true;
+			this.lblMultiSensorHelp.Cursor = System.Windows.Forms.Cursors.Help;
+			this.lblMultiSensorHelp.Location = new System.Drawing.Point(125, 220);
+			this.lblMultiSensorHelp.Name = "lblMultiSensorHelp";
+			this.lblMultiSensorHelp.Size = new System.Drawing.Size(62, 13);
+			this.lblMultiSensorHelp.TabIndex = 12;
+			this.lblMultiSensorHelp.TabStop = true;
+			this.lblMultiSensorHelp.Text = "(learn more)";
+			this.lblMultiSensorHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblMultiSensorHelp_LinkClicked);
+			// 
+			// txtChannelNumbers
+			// 
+			this.txtChannelNumbers.Location = new System.Drawing.Point(109, 238);
+			this.txtChannelNumbers.Name = "txtChannelNumbers";
+			this.txtChannelNumbers.Size = new System.Drawing.Size(154, 20);
+			this.txtChannelNumbers.TabIndex = 13;
+			this.txtChannelNumbers.Text = "1";
+			this.txtChannelNumbers.TextChanged += new System.EventHandler(this.txtChannelNumbers_TextChanged);
 			// 
 			// AddCameraForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(580, 271);
+			this.Controls.Add(this.txtChannelNumbers);
+			this.Controls.Add(this.lblMultiSensorHelp);
+			this.Controls.Add(this.label11);
+			this.Controls.Add(this.lblMultiSensorQ);
 			this.Controls.Add(this.cbSunsetProfile);
 			this.Controls.Add(this.cbSunriseProfile);
 			this.Controls.Add(this.label9);
@@ -356,5 +405,9 @@
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.ComboBox cbSunriseProfile;
 		private System.Windows.Forms.ComboBox cbSunsetProfile;
+		private System.Windows.Forms.Label lblMultiSensorQ;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.LinkLabel lblMultiSensorHelp;
+		private System.Windows.Forms.TextBox txtChannelNumbers;
 	}
 }

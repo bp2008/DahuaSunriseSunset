@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BPUtil;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace DahuaSunriseSunset
@@ -13,9 +16,22 @@ namespace DahuaSunriseSunset
 		public string dayFocus = "";
 		public string nightZoom = "";
 		public string nightFocus = "";
+		public string channelNumbers = "1";
 		public int secondsBetweenLensCommands = 4;
 		public Profile sunriseProfile = Profile.Day;
 		public Profile sunsetProfile = Profile.Night;
+
+		/// <summary>
+		/// Gets the channel number minus 1, clamped between [0-255].
+		/// </summary>
+		public int[] ChannelIndexes
+		{
+			get
+			{
+				GetChannelIndexes(channelNumbers, out int[] channelIndexes);
+				return channelIndexes;
+			}
+		}
 
 		public CameraDefinition()
 		{
@@ -28,7 +44,7 @@ namespace DahuaSunriseSunset
 			this.https = https;
 		}
 
-		public CameraDefinition(string hostAndPort, string user, string pass, bool https, string dayZoom, string dayFocus, string nightZoom, string nightFocus, int lensDelay, Profile sunriseProfile, Profile sunsetProfile) : this(hostAndPort, user, pass, https)
+		public CameraDefinition(string hostAndPort, string user, string pass, bool https, string dayZoom, string dayFocus, string nightZoom, string nightFocus, int lensDelay, Profile sunriseProfile, Profile sunsetProfile, string channelNumbers) : this(hostAndPort, user, pass, https)
 		{
 			this.dayZoom = dayZoom;
 			this.dayFocus = dayFocus;
@@ -37,6 +53,7 @@ namespace DahuaSunriseSunset
 			this.secondsBetweenLensCommands = lensDelay;
 			this.sunriseProfile = sunriseProfile;
 			this.sunsetProfile = sunsetProfile;
+			this.channelNumbers = channelNumbers;
 		}
 
 		public override string ToString()
@@ -54,6 +71,30 @@ namespace DahuaSunriseSunset
 		public string GetUrlBase()
 		{
 			return "http" + (https ? "s" : "") + "://" + hostAndPort + "/";
+		}
+		/// <summary>
+		/// Parses the input string and returns true if it is valid or false if invalid. Also outputs an array of valid channel indexes that is guaranteed not to be empty.
+		/// </summary>
+		/// <param name="channelIndexes"></param>
+		/// <returns></returns>
+		public static bool GetChannelIndexes(string str, out int[] channelIndexes)
+		{
+			List<int> indexes = new List<int>();
+			bool allOk = true;
+			if (!string.IsNullOrWhiteSpace(str))
+			{
+				foreach (string strNum in str.Split(','))
+				{
+					if (int.TryParse(strNum.Trim(), out int num))
+						indexes.Add(NumberUtil.Clamp(num - 1, 0, 255));
+					else
+						allOk = false;
+				}
+			}
+			if (indexes.Count == 0)
+				indexes.Add(0);
+			channelIndexes = indexes.ToArray();
+			return allOk;
 		}
 	}
 	public enum Profile
