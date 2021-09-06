@@ -21,22 +21,22 @@ namespace DahuaSunriseSunset
 		public static void Calc(double lat, double lon, out DateTime nextRise, out DateTime nextSet, out bool timeZoneAndLongitudeAreCompatible, double sunriseOffsetHours = 0, double sunsetOffsetHours = 0)
 		{
 			timeZoneAndLongitudeAreCompatible = true;
-			DateTime now = DateTime.UtcNow;
-			nextRise = DateTime.MinValue;
-			nextSet = DateTime.MinValue;
-			for (int offsetDays = 0; offsetDays < 366; offsetDays++)
-			{
-				DateTime calcDay = now.AddDays(offsetDays);
-				Coordinate c = new Coordinate(lat, lon, calcDay);
-				if (!timeZoneAndLongitudeAreCompatible)
-					return;
-				if (nextRise == DateTime.MinValue && c.CelestialInfo.SunRise != null && c.CelestialInfo.SunRise.Value.AddHours(sunriseOffsetHours) > now)
-					nextRise = c.CelestialInfo.SunRise.Value.AddHours(sunriseOffsetHours).ToLocalTime();
-				if (nextSet == DateTime.MinValue && c.CelestialInfo.SunSet != null && c.CelestialInfo.SunSet.Value.AddHours(sunsetOffsetHours) > now)
-					nextSet = c.CelestialInfo.SunSet.Value.AddHours(sunsetOffsetHours).ToLocalTime();
-				if (nextRise != DateTime.MinValue && nextSet != DateTime.MinValue)
-					return;
-			}
+			DateTime now = DateTime.Now;
+			TimeSpan utcOffset = TimeZone.CurrentTimeZone.GetUtcOffset(now);
+			Coordinate c = new Coordinate(lat, lon, now);
+			c.Offset = utcOffset.TotalHours;
+			nextRise = Celestial.Get_Next_SunRise(c).AddHours(sunriseOffsetHours);
+			nextSet = Celestial.Get_Next_SunSet(c).AddHours(sunsetOffsetHours);
+
+			//for (int offsetDays = 0; offsetDays < 366; offsetDays++)
+			//{
+			//	if (nextRise == DateTime.MinValue && c.CelestialInfo.SunRise != null && c.CelestialInfo.SunRise.Value.AddHours(sunriseOffsetHours) > now)
+			//		nextRise = c.CelestialInfo.SunRise.Value.AddHours(sunriseOffsetHours).AddHours(-4);
+			//	if (nextSet == DateTime.MinValue && c.CelestialInfo.SunSet != null && c.CelestialInfo.SunSet.Value.AddHours(sunsetOffsetHours) > now)
+			//		nextSet = c.CelestialInfo.SunSet.Value.AddHours(sunsetOffsetHours).AddHours(-4);
+			//	if (nextRise != DateTime.MinValue && nextSet != DateTime.MinValue)
+			//		return;
+			//}
 			//timeZoneAndLongitudeAreCompatible = true;
 
 			//DateTime now = DateTime.Now;
