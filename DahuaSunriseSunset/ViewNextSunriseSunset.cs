@@ -25,7 +25,7 @@ namespace DahuaSunriseSunset
 			DateTime rise, set;
 			TimeSpan utcOffset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
 			bool timeZoneAndLongitudeAreCompatible;
-			SunHelper.Calc(cfg.latitude, cfg.longitude, out rise, out set, out timeZoneAndLongitudeAreCompatible);
+			SunHelper.Calc(cfg.latitude, cfg.longitude, out rise, out set, out timeZoneAndLongitudeAreCompatible, cfg.sunriseOffsetHours, cfg.sunsetOffsetHours);
 			label1.Text = "Lat " + cfg.latitude + Environment.NewLine
 				+ "Lon " + cfg.longitude + Environment.NewLine
 				+ "UTC Offset: " + utcOffset.TotalSeconds + " seconds (" + utcOffset.TotalHours + " hours)" + Environment.NewLine
@@ -33,11 +33,18 @@ namespace DahuaSunriseSunset
 				+ (timeZoneAndLongitudeAreCompatible ? "" : "Your machine's time zone needs to be on the same side " + Environment.NewLine
 														  + "of the prime meridian as the longitude you have entered." + Environment.NewLine + Environment.NewLine)
 				+ (rise > set ?
-				("Sunset at " + set + Environment.NewLine
-				+ "Sunrise at " + rise)
+				("Sunset at " + set + OffsetStr(cfg.sunsetOffsetHours) + Environment.NewLine
+				+ "Sunrise at " + rise + OffsetStr(cfg.sunriseOffsetHours))
 				:
-				("Sunrise at " + rise + Environment.NewLine
-				+ "Sunset at " + set));
+				("Sunrise at " + rise + OffsetStr(cfg.sunriseOffsetHours) + Environment.NewLine
+				+ "Sunset at " + set + OffsetStr(cfg.sunsetOffsetHours)));
+		}
+		private static string OffsetStr(double hours)
+		{
+			if (hours == 0)
+				return "";
+			else
+				return " (time was offset " + hours + " hr)";
 		}
 	}
 }
