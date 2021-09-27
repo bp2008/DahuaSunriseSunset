@@ -35,8 +35,8 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="CoordinateSharp, Version=2.11.1.1, Culture=neutral, PublicKeyToken=f45e02df057b7725, processorArchitecture=MSIL">
-      <HintPath>packages\CoordinateSharp.2.11.1.1\lib\net40\CoordinateSharp.dll</HintPath>
+    <Reference Include="CoordinateSharp, Version=2.12.1.1, Culture=neutral, PublicKeyToken=f45e02df057b7725, processorArchitecture=MSIL">
+      <HintPath>packages\CoordinateSharp.2.12.1.1\lib\net40\CoordinateSharp.dll</HintPath>
     </Reference>
     <Reference Include="Costura, Version=1.6.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>packages\Costura.Fody.1.6.2\lib\dotnet\Costura.dll</HintPath>
